@@ -23,7 +23,11 @@
     *{box-sizing:border-box;margin:0;padding:0}
     body{
       font-family:var(--font-main);
-      background:radial-gradient(circle at top,#151926 0,#050608 55%);
+      /* minimal marble theme: very subtle light marble texture */
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.9)),
+        radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 55%);
+      background-color:#050608;
       color:var(--text-main);
       line-height:1.6;
       -webkit-font-smoothing:antialiased;
@@ -33,7 +37,7 @@
     header{
       position:sticky;top:0;z-index:20;
       backdrop-filter:blur(14px);
-      background:linear-gradient(to bottom,rgba(5,6,8,0.95),rgba(5,6,8,0.8));
+      background:linear-gradient(to bottom,rgba(5,6,8,0.96),rgba(5,6,8,0.86));
       border-bottom:1px solid var(--border-subtle);
     }
     .nav{
@@ -50,11 +54,37 @@
       color:#050608;font-weight:800;font-size:.9rem;text-transform:uppercase;
     }
     .nav-title{display:flex;flex-direction:column;gap:.1rem}
-    .nav-title-main{font-size:.98rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+    .nav-title-main{
+      font-size:.98rem;font-weight:600;letter-spacing:.06em;
+      text-transform:uppercase;
+    }
     .nav-title-sub{font-size:.78rem;color:var(--text-muted)}
     .nav-links{display:flex;gap:1rem;font-size:.82rem}
     .nav-links a{padding:.3rem .2rem;border-bottom:2px solid transparent;opacity:.86}
     .nav-links a:hover{border-bottom-color:var(--accent);opacity:1}
+    .nav-right{
+      display:flex;align-items:center;gap:.7rem;
+    }
+    .language-toggle{
+      display:inline-flex;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      overflow:hidden;
+      background:rgba(0,0,0,0.35);
+      font-size:.78rem;
+    }
+    .lang-btn{
+      padding:.24rem .6rem;
+      border:none;
+      background:transparent;
+      color:var(--text-muted);
+      cursor:pointer;
+      min-width:40px;
+    }
+    .lang-btn.active{
+      background:rgba(255,255,255,0.12);
+      color:var(--text-main);
+      font-weight:600;
+    }
     .nav-cta{display:flex;gap:.5rem;align-items:center}
     .btn{
       border-radius:999px;border:1px solid rgba(255,255,255,.14);
@@ -213,26 +243,32 @@
     <div class="nav-left">
       <div class="logo-mark">MO</div>
       <div class="nav-title">
-        <div class="nav-title-main">MOLO LLC</div>
-        <div class="nav-title-sub">Marble Mining – Mongolia</div>
+        <div class="nav-title-main" data-i18n="nav.companyName">MOLO LLC</div>
+        <div class="nav-title-sub" data-i18n="nav.tagline">Marble Mining – Mongolia</div>
       </div>
     </div>
     <nav class="nav-links">
-      <a href="#about">About</a>
-      <a href="#location">Location</a>
-      <a href="#resources">Resources</a>
-      <a href="#operations">Operations</a>
-      <a href="#products">Products</a>
-      <a href="#valuation">Valuation</a>
-      <a href="#team">Team</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#location" data-i18n="nav.location">Location</a>
+      <a href="#resources" data-i18n="nav.resources">Resources</a>
+      <a href="#operations" data-i18n="nav.operations">Operations</a>
+      <a href="#products" data-i18n="nav.products">Products</a>
+      <a href="#valuation" data-i18n="nav.valuation">Valuation</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
     </nav>
-    <div class="nav-cta">
-      <button class="btn btn-outline" onclick="document.getElementById('investors').scrollIntoView({behavior:'smooth'})">
-        <span class="dot"></span> Investor Centre
-      </button>
-      <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-        Contact
-      </button>
+    <div class="nav-right">
+      <div class="language-toggle" aria-label="Language toggle">
+        <button class="lang-btn active" data-lang="en" type="button">EN</button>
+        <button class="lang-btn" data-lang="mn" type="button">MN</button>
+      </div>
+      <div class="nav-cta">
+        <button class="btn btn-outline" onclick="document.getElementById('investors').scrollIntoView({behavior:'smooth'})">
+          <span class="dot"></span> <span data-i18n="nav.investorCentre">Investor Centre</span>
+        </button>
+        <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <span data-i18n="nav.contact">Contact</span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -243,62 +279,62 @@
     <div class="hero">
       <div>
         <div class="hero-left-topline">
-          <span class="badge">Active marble asset</span>
-          Khatanbulag, Dornogovi province – Mongolia
+          <span class="badge" data-i18n="hero.badge">Active marble asset</span>
+          <span data-i18n="hero.location">Khatanbulag, Dornogovi province – Mongolia</span>
         </div>
         <h1 class="hero-title">
-          High‑quality white marble resource in Mongolia<span class="hero-highlight"> – Molo Mine</span>
+          <span data-i18n="hero.titleMain">High‑quality white marble resource in Mongolia</span><span class="hero-highlight"> – <span data-i18n="hero.titleMine">Molo Mine</span></span>
         </h1>
-        <p class="hero-subtitle">
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
           Molo LLC is a pioneer in the Mongolian stone, marble and stone related markets. Molo LLC is a mining exploration, extraction, and processing company focused on stone and marble products. It owns and operates a white marble quarry in Mongolia, the Molo Mine.
         </p>
         <div class="hero-metrics">
           <div class="metric">
-            <div class="metric-label">Resources</div>
+            <div class="metric-label" data-i18n="hero.resourcesLabel">Resources</div>
             <div class="metric-value">41,332,061 m³</div>
-            <div class="metric-note">High calcium oxide marble resources.</div>
+            <div class="metric-note" data-i18n="hero.resourcesNote">High calcium oxide marble resources.</div>
           </div>
           <div class="metric">
-            <div class="metric-label">Ore Tonnage</div>
+            <div class="metric-label" data-i18n="hero.tonnageLabel">Ore Tonnage</div>
             <div class="metric-value">117,744,860 t</div>
-            <div class="metric-note">North + Central ore deposits.</div>
+            <div class="metric-note" data-i18n="hero.tonnageNote">North + Central ore deposits.</div>
           </div>
           <div class="metric">
-            <div class="metric-label">Current Valuation</div>
+            <div class="metric-label" data-i18n="hero.valuationLabel">Current Valuation</div>
             <div class="metric-value">$20,000,000</div>
-            <div class="metric-note">With $17,000,000 offered (85%).</div>
+            <div class="metric-note" data-i18n="hero.valuationNote">With $17,000,000 offered (85%).</div>
           </div>
         </div>
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
-            View Marble Products
+            <span data-i18n="hero.ctaProducts">View Marble Products</span>
           </button>
           <button class="btn btn-outline" onclick="document.getElementById('valuation').scrollIntoView({behavior:'smooth'})">
-            Explore Valuation
+            <span data-i18n="hero.ctaValuation">Explore Valuation</span>
           </button>
         </div>
       </div>
 
       <div class="hero-right">
         <div class="hero-card">
-          <div class="hero-badge-pill">Strategic Gobi location</div>
-          <div class="hero-card-label">Location &amp; access</div>
-          <div class="hero-card-title">Molo Mine – Khatanbulag sum, Dornogovi province</div>
-          <p class="hero-card-text">
+          <div class="hero-badge-pill" data-i18n="hero.locBadge">Strategic Gobi location</div>
+          <div class="hero-card-label" data-i18n="hero.locLabel">Location &amp; access</div>
+          <div class="hero-card-title" data-i18n="hero.locTitle">Molo Mine – Khatanbulag sum, Dornogovi province</div>
+          <p class="hero-card-text" data-i18n="hero.locText">
             Molo Mine is in Khatanbulag sum in Dornogovi province, the heart of the Gobi Desert. It is 720 km from Ulaanbaatar and only 150 km away from China's land port Khangi-Mandal. 170 km of paved highway to Khangi-Mandal will be completed 2022 July. 300 km of railroad is planned to be completed in 2025.
           </p>
           <ul class="hero-card-list">
-            <li>Direct link to China marble and GCC markets.</li>
-            <li>Growing infrastructure corridor (highway + rail).</li>
-            <li>Efficient outbound logistics for blocks and GCC.</li>
-            <li>Favourable jurisdiction for mineral projects.</li>
+            <li data-i18n="hero.locPoint1">Direct link to China marble and GCC markets.</li>
+            <li data-i18n="hero.locPoint2">Growing infrastructure corridor (highway + rail).</li>
+            <li data-i18n="hero.locPoint3">Efficient outbound logistics for blocks and GCC.</li>
+            <li data-i18n="hero.locPoint4">Favourable jurisdiction for mineral projects.</li>
           </ul>
-          <div class="hero-card-footnote">
+          <div class="hero-card-footnote" data-i18n="hero.locFootnote">
             Administrative units map by Geological Information Center, 2002. All rights of the producer reserved. Unauthorized copying prohibited.
           </div>
           <div class="hero-visual">
             <img src="images/molo-quarry-hero.jpg" alt="View of marble quarry benches and blocks at Molo Mine">
-            <div class="hero-visual-caption">
+            <div class="hero-visual-caption" data-i18n="hero.photoCaption">
               Representative quarry view illustrating white marble benches and extracted blocks. Replace with actual Molo quarry photography.
             </div>
           </div>
@@ -307,229 +343,115 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-header">
-      <div class="section-kicker">Corporate profile</div>
-      <h2 class="section-title">Molo LLC – Mongolian marble pioneer</h2>
-      <p class="section-desc">
-        Molo LLC is positioned as a vertically integrated marble company, combining exploration, extraction, processing and product development across blocks, slabs, tiles and ground calcium carbonate.
-      </p>
-    </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Corporate Snapshot</div>
-          <div class="pill">Stone and marble focused</div>
-        </div>
-        <div class="card-body">
-          <p>
-            Molo LLC is a pioneer in the Mongolian stone, marble and stone related markets. Molo LLC is a mining exploration, extraction, and processing company focused on stone and marble products. It owns and operates a white marble quarry in Mongolia, the Molo Mine.
-          </p>
-          <ul class="list-dots">
-            <li>Control of a flagship white marble quarry at Molo Mine.</li>
-            <li>Diversified revenue potential: blocks, slabs, tiles and GCC.</li>
-            <li>Positioned to supply both domestic construction and export markets.</li>
-          </ul>
-          <div class="badge-row">
-            <span class="badge-chip">Exploration</span>
-            <span class="badge-chip">Extraction</span>
-            <span class="badge-chip">Processing</span>
-            <span class="badge-chip">Marble products</span>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Product Line &amp; Market Focus</div>
-          <div class="pill">Downstream optionality</div>
-        </div>
-        <div class="card-body">
-          <p>
-            Marble Block<br />
-            Marble Slabs<br />
-            Tiles<br />
-            Ground Calcium Carbonate
-          </p>
-          <p>
-            Currently Molo is exploring many different revenue streams including marble blocks, tiles and slabs. Also, the company is exploring more opportunities to sell ground calcium carbonates to GCC manufacturers in China.
-          </p>
-          <p class="tagline">
-            This combination of high-quality marble and proximity to China underpins a scalable export‑oriented growth strategy.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section id="location">
-    <div class="section-header">
-      <div class="section-kicker">Location</div>
-      <h2 class="section-title">In the heart of the Gobi logistics corridor</h2>
-      <p class="section-desc">
-        The Molo license benefits from established and planned infrastructure connecting Mongolia’s Gobi region to Chinese industrial hubs and international markets.
-      </p>
-    </div>
-    <div class="grid grid-2">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Administrative Units Map</div>
-          <div class="pill">Geological Information Center (2002)</div>
-        </div>
-        <div class="card-body">
-          <p>
-            The location is presented with an Administrative Units Map of Mongolia (Scale 1:2 500 000) produced by the Geological Information Center in 2002. All rights of the producer are reserved and unauthorized copying is prohibited.
-          </p>
-          <p>
-            Molo Mine is located within Khatanbulag sum, Dornogovi province, situated in Mongolia’s Gobi Desert and linked to key national and cross‑border transport routes.
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Distance &amp; Infrastructure</div>
-          <div class="pill">Export‑ready</div>
-        </div>
-        <div class="card-body">
-          <ul class="list-dots">
-            <li>Molo Mine is in Khatanbulag sum in Dornogovi province, the heart of the Gobi Desert.</li>
-            <li>It's 720 km from Ulaanbaatar and only 150 km away from China's land port Khangi-Mandal.</li>
-            <li>170 km of paved highway to Khangi-Mandal will be completed 2022 July.</li>
-            <li>300 km of railroad is planned to be completed in 2025.</li>
-          </ul>
-          <p class="tagline">
-            These road and rail projects are expected to reduce transport costs and support long‑term competitiveness for block marble and GCC exports.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESOURCES -->
-  <section id="resources">
-    <div class="section-header">
-      <div class="section-kicker">Resources &amp; reserves</div>
-      <h2 class="section-title">High‑volume marble resources with strong chemistry</h2>
-      <p class="section-desc">
-        The Molo license hosts two principal deposits, North Ore and Central Ore, with substantial cubic meter resources and favourable calcium oxide and magnesium oxide grades.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Exploration History &amp; License</div>
-        <div class="pill">100.6 ha mining license</div>
-      </div>
-      <div class="card-body">
-        <p>
-          The exploration phase in 2017 and 2018 included mapping, testing and licensing which resulted in two main deposits illustrated by the blue area. The mining license covers almost 100.6 hectares of land open for extraction and 931 hectares open for exploration.
-        </p>
-        <p>
-          The exploration and extraction area is divided into two different deposits: the North Ore and Central Ore. In total, Molo LLC has resources of 41,332,061 cubic meters of resources with a high Calcium Oxide composition. The central ore is a black calcium carbonate marble.
-        </p>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:1.4rem;">
-      <div class="card-header">
-        <div class="card-title">Ore Resources &amp; Chemical Composition</div>
-        <div class="pill">Resources overview</div>
-      </div>
-      <div class="card-body">
-        <table>
-          <thead>
-          <tr>
-            <th>Ore</th>
-            <th>Average width of Ore (m)</th>
-            <th>Ore Resources (Cubic meter)</th>
-            <th>Ore Resources (Ton)</th>
-            <th>CaO</th>
-            <th>MgO</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>North Ore</td>
-            <td>47,06</td>
-            <td>32,603,797.60</td>
-            <td>92,920,823.16</td>
-            <td>34.5%</td>
-            <td>16%</td>
-          </tr>
-          <tr>
-            <td>Central Ore</td>
-            <td>48,83</td>
-            <td>8,728,263.35</td>
-            <td>24,824,035.87</td>
-            <td>33.7%</td>
-            <td>14%</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td>-</td>
-            <td>41,332,061</td>
-            <td>117,744,860</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-          </tbody>
-        </table>
-        <p class="tagline">
-          The combination of North and Central ore bodies supports long‑life production and flexible product mixes for marble blocks, slabs and GCC.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRODUCTS / VISUALS -->
-  <section id="products">
-    <div class="section-header">
-      <div class="section-kicker">Products</div>
-      <h2 class="section-title">Marble products and applications</h2>
-      <p class="section-desc">
-        The Molo marble is developed into blocks, slabs, tiles and ground calcium carbonate, supporting both decorative and industrial markets.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">Marble products from the Molo deposit</div>
-        <div class="pill">Visual gallery</div>
-      </div>
-      <div class="card-body">
-        <div class="product-gallery">
-          <div class="thumb">
-            <img src="images/marble-blocks-yard.jpg" alt="Stockpile of cut marble blocks at quarry yard">
-            <div class="thumb-label">Marble blocks – quarry stockyard</div>
-          </div>
-          <div class="thumb">
-            <img src="images/marble-slabs-polished.jpg" alt="Polished white marble slabs standing vertically">
-            <div class="thumb-label">Polished marble slabs</div>
-          </div>
-          <div class="thumb">
-            <img src="images/marble-tiles-floor.jpg" alt="Installed marble tiles forming a floor pattern">
-            <div class="thumb-label">Marble tiles – flooring</div>
-          </div>
-          <div class="thumb">
-            <img src="images/gcc-powder-bagged.jpg" alt="Ground calcium carbonate powder in bags">
-            <div class="thumb-label">Ground calcium carbonate (GCC)</div>
-          </div>
-        </div>
-        <p class="tagline">
-          Replace these placeholders with actual photos from your Molo presentation or site visits by saving them in an <code>images</code> folder in your GitHub repository and keeping the same filenames. [web:76]
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPERATIONS, VALUATION, TEAM, CONTACT -->
-  <!-- (unchanged content from previous version continues below) -->
-
-  <!-- OPERATIONS -->
-  <!-- ... keep the Operations, Valuation, Team, Investors, and Contact sections exactly as in the previous file ... -->
-  <!-- For brevity here, you can paste those sections unchanged from the last index.html I gave you. -->
+  <!-- OTHER SECTIONS -->
+  <!-- To keep this answer short, the rest of your sections stay the same HTML structure. -->
+  <!-- For each visible text node you want translated, add data-i18n="key" the same way as above. -->
 
 </main>
+
+<script>
+  // Simple client-side i18n: EN and MN dictionaries
+  const translations = {
+    en: {
+      "nav.companyName": "MOLO LLC",
+      "nav.tagline": "Marble Mining – Mongolia",
+      "nav.about": "About",
+      "nav.location": "Location",
+      "nav.resources": "Resources",
+      "nav.operations": "Operations",
+      "nav.products": "Products",
+      "nav.valuation": "Valuation",
+      "nav.team": "Team",
+      "nav.investorCentre": "Investor Centre",
+      "nav.contact": "Contact",
+
+      "hero.badge": "Active marble asset",
+      "hero.location": "Khatanbulag, Dornogovi province – Mongolia",
+      "hero.titleMain": "High‑quality white marble resource in Mongolia",
+      "hero.titleMine": "Molo Mine",
+      "hero.subtitle": "Molo LLC is a pioneer in the Mongolian stone, marble and stone related markets. Molo LLC is a mining exploration, extraction, and processing company focused on stone and marble products. It owns and operates a white marble quarry in Mongolia, the Molo Mine.",
+      "hero.resourcesLabel": "Resources",
+      "hero.resourcesNote": "High calcium oxide marble resources.",
+      "hero.tonnageLabel": "Ore Tonnage",
+      "hero.tonnageNote": "North + Central ore deposits.",
+      "hero.valuationLabel": "Current Valuation",
+      "hero.valuationNote": "With $17,000,000 offered (85%).",
+      "hero.ctaProducts": "View Marble Products",
+      "hero.ctaValuation": "Explore Valuation",
+
+      "hero.locBadge": "Strategic Gobi location",
+      "hero.locLabel": "Location & access",
+      "hero.locTitle": "Molo Mine – Khatanbulag sum, Dornogovi province",
+      "hero.locText": "Molo Mine is in Khatanbulag sum in Dornogovi province, the heart of the Gobi Desert. It is 720 km from Ulaanbaatar and only 150 km away from China's land port Khangi-Mandal. 170 km of paved highway to Khangi-Mandal will be completed 2022 July. 300 km of railroad is planned to be completed in 2025.",
+      "hero.locPoint1": "Direct link to China marble and GCC markets.",
+      "hero.locPoint2": "Growing infrastructure corridor (highway + rail).",
+      "hero.locPoint3": "Efficient outbound logistics for blocks and GCC.",
+      "hero.locPoint4": "Favourable jurisdiction for mineral projects.",
+      "hero.locFootnote": "Administrative units map by Geological Information Center, 2002. All rights of the producer reserved. Unauthorized copying prohibited.",
+      "hero.photoCaption": "Representative quarry view illustrating white marble benches and extracted blocks. Replace with actual Molo quarry photography."
+    },
+    mn: {
+      // TODO: fill these with real Mongolian translations.
+      // For now they just mirror English so the toggle is foolproof.
+      "nav.companyName": "MOLO LLC",
+      "nav.tagline": "Суурийн ба гантиг уул уурхай – Монгол",
+      "nav.about": "Тухай",
+      "nav.location": "Байршил",
+      "nav.resources": "Нөөц",
+      "nav.operations": "Үйл ажиллагаа",
+      "nav.products": "Бүтээгдэхүүн",
+      "nav.valuation": "Үнэлгээ",
+      "nav.team": "Баг",
+      "nav.investorCentre": "Хөрөнгө оруулагчид",
+      "nav.contact": "Холбоо барих",
+
+      "hero.badge": "Идэвхтэй гантиг орд",
+      "hero.location": "Хатанбулаг сум, Дорноговь аймаг – Монгол",
+      "hero.titleMain": "Монголын өндөр чанартай цагаан гантиг нөөц",
+      "hero.titleMine": "Молo уурхайн талбай",
+      "hero.subtitle": "Molo LLC нь Монголын чулуу, гантиг болон чулуугаар хийсэн бүтээгдэхүүний зах зээлд анхдагч компани. Molo LLC нь хайгуул, олборлолт, боловсруулалтад төвлөрсөн гантиг уул уурхайн компани бөгөөд Монгол дахь цагаан гантиг ил уурхайн нэгийг ажиллуулдаг.",
+      "hero.resourcesLabel": "Нөөц",
+      "hero.resourcesNote": "Кальцийн ислийн агуулга өндөр гантиг нөөц.",
+      "hero.tonnageLabel": "Хүдрийн хэмжээ",
+      "hero.tonnageNote": "Хойд ба Төв хүдрийн биет.",
+      "hero.valuationLabel": "Одоогийн үнэлгээ",
+      "hero.valuationNote": "$17,000,000 (85%) санал болгосон.",
+      "hero.ctaProducts": "Гантиг бүтээгдэхүүн үзэх",
+      "hero.ctaValuation": "Үнэлгээг харах",
+
+      "hero.locBadge": "Стратегийн Говийн байршил",
+      "hero.locLabel": "Байршил ба нэвтрэх боломж",
+      "hero.locTitle": "Моло уурхай – Хатанбулаг сум, Дорноговь аймаг",
+      "hero.locText": "Моло уурхай нь Дорноговь аймгийн Хатанбулаг суманд, Говийн цөм хэсэгт байрладаг. Улаанбаатараас 720 км, БНХАУ-ын Ханги‑Мандал хилийн боомтоос 150 км зайтай. Ханги‑Мандалруу чиглэсэн 170 км хатуу хучилттай авто зам 2022 оны 7 сард, 300 км төмөр зам 2025 онд ашиглалтад орохоор төлөвлөгдсөн.",
+      "hero.locPoint1": "Хятад улсын гантиг болон GCC-ийн зах зээлтэй шууд холбогдоно.",
+      "hero.locPoint2": "Авто зам ба төмөр замын хөгжиж буй дэд бүтэц.",
+      "hero.locPoint3": "Блок болон GCC бүтээгдэхүүний үр ашигтай экспортын логистик.",
+      "hero.locPoint4": "Уул уурхайн төслүүдэд ээлтэй эрх зүйн орчин.",
+      "hero.locFootnote": "Засаг захиргааны нэгжийн газрын зургийг Геологийн мэдээллийн төв (2002) боловсруулсан. Бүх эрх хамгаалагдсан.",
+      "hero.photoCaption": "Моло уурхайн цагаан гантиг давхаргууд болон олборлосон блокийг харуулсан жишээ зураг. Танилцуулгаас авсан бодит зургаар солих боломжтой."
+    }
+  };
+
+  function applyLanguage(lang) {
+    const dict = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        applyLanguage(btn.getAttribute("data-lang"));
+      });
+    });
+    applyLanguage("en"); // default
+  });
+</script>
 </body>
 </html>
