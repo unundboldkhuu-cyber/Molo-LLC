@@ -134,11 +134,17 @@
       background:#000;
     }
     .hero-visual img,
-    .figure img{width:100%;display:block;object-fit:cover;max-height:260px}
+    .figure img{width:100%;display:block;object-fit:cover;}
     .hero-visual-caption,
     .figure-caption{
       padding:.4rem .75rem;font-size:.78rem;color:var(--text-muted);
       background:rgba(0,0,0,.65);border-top:1px solid rgba(255,255,255,.06);
+    }
+
+    /* Taller image just for the reserves figure */
+    #reserves-map .figure img{
+      max-height:none;
+      height:auto;
     }
 
     .grid{display:grid;gap:1.4rem}
@@ -168,6 +174,41 @@
     .footer{
       margin-top:3rem;padding:1.5rem 0 .5rem;border-top:1px solid var(--border-subtle);
       font-size:.78rem;color:var(--text-muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;
+    }
+
+    /* Lightbox styles for marble slabs */
+    .lightbox-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.85);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:40;
+    }
+    .lightbox-backdrop.active{display:flex}
+    .lightbox-content{
+      max-width:90vw;
+      max-height:90vh;
+      position:relative;
+    }
+    .lightbox-content img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:10px;
+    }
+    .lightbox-close{
+      position:absolute;
+      top:-32px;
+      right:0;
+      background:rgba(0,0,0,0.7);
+      color:#fff;
+      border:none;
+      padding:.25rem .6rem;
+      border-radius:999px;
+      font-size:.8rem;
+      cursor:pointer;
     }
 
     @media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}}
@@ -279,6 +320,24 @@
         Molo LLC is positioned as a vertically integrated marble company, combining exploration, extraction, processing and product development across blocks, slabs, tiles and ground calcium carbonate.
       </p>
     </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Geological setting of the Molo license</div>
+        <div class="pill">Geological map</div>
+      </div>
+      <div class="card-body">
+        <p>
+          Regional and local geological mapping define the marble horizons, structural controls and continuity of the North and Central ore bodies within the Molo license area.
+        </p>
+        <div class="figure" style="margin-top:.8rem;">
+          <img src="images/geo-map-molo.jpg" alt="Geological map of the Molo license area">
+          <div class="figure-caption">
+            Geological map of the Molo license showing marble units, structural trends and neighboring lithologies.
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- LOCATION -->
@@ -300,8 +359,8 @@
           <p data-i18n="loc.mapText1">
             The location is presented with an Administrative Units Map of Mongolia (Scale 1:2 500 000) produced by the Geological Information Center in 2002. All rights of the producer are reserved and unauthorized copying is prohibited.
           </p>
-          <!-- No image here until admin-units-map-mongolia.jpg exists -->
           <div class="figure">
+            <img src="images/admin-units-map-mongolia.jpg" alt="Administrative units map of Mongolia showing provinces and main roads">
             <div class="figure-caption" data-i18n="loc.mapCaption">
               Administrative units map of Mongolia highlighting the national road network and provincial boundaries.
             </div>
@@ -320,6 +379,12 @@
             <li data-i18n="loc.infPoint3">170 km of paved highway to Khangi-Mandal will be completed 2022 July.</li>
             <li data-i18n="loc.infPoint4">300 km of railroad is planned to be completed in 2025.</li>
           </ul>
+          <div class="figure" style="margin-top:.8rem;">
+            <img src="images/distance-infrastructure-molo.jpg" alt="Schematic of distances and infrastructure from Molo mine to key hubs">
+            <div class="figure-caption">
+              Distance and infrastructure corridors linking the Molo mine to Ulaanbaatar and the Khangi‑Mandal border port.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -437,13 +502,21 @@
       <div class="card-body">
         <div class="product-gallery">
           <div class="thumb">
-            <img src="images/marble-slabs-molo.jpg.jpg" alt="Marble slab and block at Molo site">
+            <img src="images/marble-slabs-molo.jpg.jpg" alt="Marble slab and block at Molo site" id="slab-thumb">
             <div class="thumb-label" data-i18n="prod.gallerySlab">Marble slabs – Molo quarry site</div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Lightbox overlay for slabs -->
+  <div class="lightbox-backdrop" id="slab-lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" type="button" id="slab-close">Close</button>
+      <img src="images/marble-slabs-molo.jpg.jpg" alt="Full view of marble slabs from Molo deposit">
+    </div>
+  </div>
 
   <!-- PLACEHOLDER SECTIONS (Valuation, Team, Investors, Contact) -->
   <section id="valuation">
@@ -481,7 +554,12 @@
       <div class="section-kicker" data-i18n="contact.kicker">Contact</div>
       <h2 class="section-title" data-i18n="contact.title">Get in touch</h2>
       <p class="section-desc" data-i18n="contact.desc">
-        For further information, site visits or investment discussions, please reach out by email.
+        For further information, site visits or investment discussions, please reach out by email or phone.<br>
+        Email:
+        <a href="mailto:boldkhuu.nanzad1@gmail.com">boldkhuu.nanzad1@gmail.com</a>,
+        <a href="mailto:esen.boldoo@gmail.com">esen.boldoo@gmail.com</a><br>
+        Phone:
+        <a href="tel:+97699111276">+976‑99111276</a>
       </p>
     </div>
   </section>
@@ -593,7 +671,7 @@
 
       "contact.kicker":"Contact",
       "contact.title":"Get in touch",
-      "contact.desc":"For further information, site visits or investment discussions, please reach out by email.",
+      "contact.desc":"For further information, site visits or investment discussions, please reach out by email or phone.",
 
       "footer.note":"All figures and descriptions reproduced from the MOLO LLC investor presentation."
     },
@@ -696,7 +774,7 @@
 
       "contact.kicker":"Холбоо барих",
       "contact.title":"Холбогдох",
-      "contact.desc":"Нэмэлт мэдээлэл, уурхайн айлчлал эсвэл хөрөнгө оруулалтын хэлэлцээний талаар имэйлээр холбогдоно уу.",
+      "contact.desc":"Нэмэлт мэдээлэл, уурхайн айлчлал эсвэл хөрөнгө оруулалтын хэлэлцээний талаар имэйлээр эсвэл утсаар холбогдоно уу.",
 
       "footer.note":"Бүх тоо баримт, тайлбарууд нь MOLO LLC‑ийн хөрөнгө оруулагчдын танилцуулгаас иш татсан болно."
     }
@@ -719,6 +797,25 @@
       btn.addEventListener("click", () => applyLanguage(btn.getAttribute("data-lang")));
     });
     applyLanguage("en");
+
+    // Lightbox behavior for marble slabs
+    const thumb = document.getElementById('slab-thumb');
+    const lightbox = document.getElementById('slab-lightbox');
+    const closeBtn = document.getElementById('slab-close');
+
+    if (thumb && lightbox && closeBtn) {
+      thumb.addEventListener('click', () => {
+        lightbox.classList.add('active');
+      });
+      closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+      });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+        }
+      });
+    }
   });
 </script>
 </body>
