@@ -52,13 +52,17 @@
     .nav-left{display:flex;align-items:center;gap:.6rem}
 
     .logo-mark{
-      width:36px;height:36px;border-radius:8px;
+      width:36px;
+      height:36px;
+      border-radius:8px;
       overflow:hidden;
       box-shadow:0 0 0 1px rgba(140,110,70,.25),0 10px 24px rgba(80,60,30,.35);
-      display:flex;align-items:center;justify-content:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       background:#ffffff;
     }
-    .logo-mark img{molo-logo.jpg}
+    .logo-mark img{
       width:100%;
       height:100%;
       object-fit:cover;
@@ -243,23 +247,36 @@
     /* Emphasized Marble products section */
     #products .card{
       max-width:none;
-      padding:1.6rem 1.8rem;
+      padding:2rem 2.2rem;
     }
     #products .card-header{
       align-items:center;
     }
+    #products .card-body{
+      display:flex;
+      flex-direction:column;
+      gap:1.2rem;
+    }
     #products .product-gallery{
       grid-template-columns:minmax(0,1fr);
-      margin-top:1rem;
+      margin-top:.5rem;
     }
     #products .thumb{
-      max-width:720px;
+      max-width:960px;
       margin:0 auto;
     }
     #products .thumb img{
-      height:360px;
+      height:520px;
     }
-    @media(max-width:720px){
+    @media(max-width:900px){
+      #products .thumb{
+        max-width:100%;
+      }
+      #products .thumb img{
+        height:360px;
+      }
+    }
+    @media(max-width:600px){
       #products .thumb img{
         height:260px;
       }
@@ -330,7 +347,7 @@
   <div class="nav">
     <div class="nav-left">
       <div class="logo-mark">
-        <img src="images/logo-camels.png" alt="MOLO LLC logo">
+        <img src="images/molo-logo.jpg" alt="MOLO LLC logo">
       </div>
       <div class="nav-title">
         <div class="nav-title-main" data-i18n="nav.companyName">MOLO LLC</div>
